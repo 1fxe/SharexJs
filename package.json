@@ -1,29 +1,29 @@
 {
-	"name": "sharexjs",
-	"version": "1.0.0",
-	"description": "Sharex file upload handler for node server",
-	"main": "sharex.js",
-	"scripts": {
-		"start": "node ./sharex"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/filipwtf/SharexJs.git"
-	},
-	"keywords": [
-		"Sharex",
-		"Javascript"
-	],
-	"author": "Fili",
-	"license": "SEE LICENSE in LICENSE",
-	"bugs": {
-		"url": "https://github.com/filipwtf/SharexJs/issues"
-	},
-	"homepage": "https://github.com/filipwtf/SharexJs#readme",
-	"dependencies": {
-		"dotenv": "^8.2.0",
-		"express": "^4.17.1",
-  		"express-fileupload": ">=1.1.9"
-		"randomstring": "^1.1.5"
-	}
+  "name": "sharexjs",
+  "version": "1.1.0",
+  "description": "Sharex file upload handler for node server",
+  "main": "sharex.js",
+  "scripts": {
+    "start": "node ./src/sharex"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filipwtf/SharexJs.git"
+  },
+  "keywords": [
+    "Sharex",
+    "Javascript"
+  ],
+  "author": "filipwtf",
+  "license": "SEE LICENSE in LICENSE",
+  "bugs": {
+    "url": "https://github.com/filipwtf/SharexJs/issues"
+  },
+  "homepage": "https://github.com/filipwtf/SharexJs#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": ">=1.2.0",
+    "randomstring": "^1.1.5"
+  }
 }
