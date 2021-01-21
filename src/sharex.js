@@ -34,7 +34,7 @@ app.post('/upload', async (req, res) => {
 
 app.get('/:file', async (req, res) => {
   const file = req.params.file;
-  const description = '😳';
+  const description = '😳'; // Feel free to change this file size etc
   res.render('index', {
     title: file,
     domain: DOMAIN,
