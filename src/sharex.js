@@ -34,15 +34,9 @@ app.post('/upload', async (req, res) => {
 
 app.get('/:file', async (req, res) => {
   const file = req.params.file;
-  const description = fs.stat(`./static/${file}`, (err, fileStats) => {
-    if (err) {
-      return 'N|A';
-    } else {
-      return convertBytes(fileStats.size);
-    }
-  });
+  const description = '😳';
   res.render('index', {
-    title: DOMAIN,
+    title: file,
     domain: DOMAIN,
     url: `${SECURE}://${DOMAIN}/`,
     description: description,
@@ -56,21 +50,6 @@ app.get('*', async (req, res) => {
 
 const generateFileName = async (str, type) => {
   return str + '.' + type[type.length - 1];
-};
-
-const convertBytes = (bytes) => {
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-
-  if (bytes == 0) {
-    return 'n/a';
-  }
-
-  const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-  if (i == 0) {
-    return bytes + ' ' + sizes[i];
-  }
-
-  return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
 };
 
 app.listen(PORT, () => {
