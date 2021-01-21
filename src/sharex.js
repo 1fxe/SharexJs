@@ -2,12 +2,13 @@ require('dotenv').config();
 
 const upload = require('express-fileupload');
 const randomstring = require('randomstring');
+const randomColor = require('randomcolor');
 const express = require('express');
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 const DOMAIN = process.env.DOMAIN || 'localhost:' + PORT;
-const SECURE = 'http';
+const SECURE = process.env.SECURE;
 
 app.set('views', './views');
 app.set('view engine', 'pug');
@@ -40,6 +41,7 @@ app.get('/:file', async (req, res) => {
     url: `${SECURE}://${DOMAIN}/`,
     description: description,
     image: `${SECURE}://${DOMAIN}/static/${file}`,
+    color: randomColor(),
   });
 });
 

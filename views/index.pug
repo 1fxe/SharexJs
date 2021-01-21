@@ -3,11 +3,18 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(property='og:title' content=`${title}`)
+    meta(property='og:site_name' content=`${domain}`)
+    meta(property='og:url' content=`${url}`)
+    meta(property='og:description' content=`${description}`)
+    meta(property='og:type' content='website')
+    meta(property='og:image' content=`${image}`)
     meta(property='twitter:card' content='summary_large_image')
     meta(property='twitter:url' content=`${url}`)
     meta(property='twitter:title' content=`${title}`)
     meta(property='twitter:description' content=`${description}`)
     meta(property='twitter:image' content=`${image}`)
+    meta(property='theme-color', content=`${color}`)
 
     title #{title}
   body(style="background: #211e21; height: 100vh; margin: 0; padding: 0;")
