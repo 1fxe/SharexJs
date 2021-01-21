@@ -15,7 +15,7 @@
     "Javascript"
   ],
   "author": "filipwtf",
-  "license": "SEE LICENSE in LICENSE",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/filipwtf/SharexJs/issues"
   },
@@ -24,6 +24,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": ">=1.2.0",
+    "pug": "^3.0.0",
     "randomstring": "^1.1.5"
   }
 }
