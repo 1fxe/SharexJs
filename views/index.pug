@@ -9,9 +9,13 @@ html(lang="en")
     meta(property='og:description' content=`${description}`)
     meta(property='og:type' content='website')
     meta(property='og:image' content=`${image}`)
+    meta(property='twitter:card' content='summary_large_image')
+    meta(property='twitter:url' content=`${url}`)
+    meta(property='twitter:title' content=`${title}`)
+    meta(property='twitter:description' content=`${description}`)
+    meta(property='twitter:image' content=`${image}`)
 
     title #{title}
   body(style="background: #211e21; height: 100vh; margin: 0; padding: 0;")
     div(style="display: flex; justify-content: center; align-items: center; height: 100%;")
       img( src=`${image}`, alt="Guess the image failed to load")
-      
