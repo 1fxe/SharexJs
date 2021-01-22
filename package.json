@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/filipwtf/SharexJs#readme",
   "dependencies": {
+    "@google-cloud/vision": "^2.3.0",
+    "byte-size": "^7.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": ">=1.2.0",

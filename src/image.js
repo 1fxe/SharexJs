@@ -1,10 +1,17 @@
+const vision = require('@google-cloud/vision');
 const byteSize = require('byte-size');
 const fs = require('fs');
 
+const client = new vision.ImageAnnotatorClient();
+
 module.exports.imageClassification = async (path) => {
   try {
+    const [result] = await client.labelDetection(path);
+    const label = result.labelAnnotations[0];
     const stats = fs.statSync(path);
-    return `I wasted ${byteSize(stats.size)}`;
+    return `Vision API: ${label.description}\nScore: ${
+      label.score
+    }\nI wasted ${byteSize(stats.size)}`;
   } catch (err) {
     return '😳';
   }

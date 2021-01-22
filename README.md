@@ -2,6 +2,10 @@
 
 Sharex file uploader handler written in js
 
+## Cloud Vision
+
+Requirements: [Google Vision](https://cloud.google.com/vision/docs/labels?hl=bg#vision_label_detection-nodejs)
+
 ## Usage 🔥
 
 Change the domain variable to your domain, basically anywhere it says localhost
