@@ -4,6 +4,7 @@ const upload = require('express-fileupload');
 const randomstring = require('randomstring');
 const randomColor = require('randomcolor');
 const express = require('express');
+const image = require('./image');
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -34,7 +35,7 @@ app.post('/upload', async (req, res) => {
 
 app.get('/:file', async (req, res) => {
   const file = req.params.file;
-  const description = '😳'; // Feel free to change this file size etc
+  const description = await image.imageClassification(`files/${file}`);
   res.render('index', {
     title: file,
     domain: DOMAIN,

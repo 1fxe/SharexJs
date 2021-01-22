@@ -13,6 +13,10 @@ Create a .env file with your chosen port, and use a custom key 🔐
 
 Then run `npm run start` to start ✔
 
+### Embed
+
+![Example Image](./github/examplei.png)
+
 ### ShareX ✨
 
 In sharex specify your custom destination
@@ -28,7 +32,3 @@ I recommend you actually read a tutorial for nginx. For example:
 - [Free https](https://letsencrypt.org/)
 
 ![Example nginx](./github/nginx.png)
-
-### Discord ✨
-
-Checkout [experimental](https://github.com/filipwtf/SharexJs/tree/experimental) for discord embed
