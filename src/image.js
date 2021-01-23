@@ -32,6 +32,5 @@ const imageLabel = async (path) => {
   }\nI wasted ${byteSize(stats.size)}`;
 };
 
-imageOCR('files/test2.png');
 
 export { imageOCR };
