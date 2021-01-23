@@ -4,7 +4,8 @@
   "description": "Sharex file upload handler for node server",
   "main": "sharex.js",
   "scripts": {
-    "start": "node ./src/sharex"
+    "build": "babel src --out-dir build && npm start",
+    "start": "node build/sharex"
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,11 @@
     "pug": "^3.0.0",
     "randomcolor": "^0.6.2",
     "randomstring": "^1.1.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11"
   }
 }

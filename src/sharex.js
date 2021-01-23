@@ -1,15 +1,13 @@
-require('dotenv').config();
+import { PORT, DOMAIN, SECURE, URL } from './constants';
+import { randomstring } from 'randomstring';
+import { randomColor } from 'randomcolor';
+import { imageOCR } from './image';
+import { existsSync } from 'fs';
 
-const upload = require('express-fileupload');
-const randomstring = require('randomstring');
-const randomColor = require('randomcolor');
-const express = require('express');
-const image = require('./image');
+import upload from 'express-fileupload';
+import express from 'express';
+
 const app = express();
-
-const PORT = process.env.PORT || 5000;
-const DOMAIN = process.env.DOMAIN || 'localhost:' + PORT;
-const SECURE = process.env.SECURE;
 
 app.set('views', './views');
 app.set('view engine', 'pug');
@@ -22,11 +20,11 @@ app.post('/upload', async (req, res) => {
     const file = req.files.file;
     const randomName = randomstring.generate({ length: 12 });
     const type = file.name.split('.');
-
     const fileName = await generateFileName(randomName, type);
+
     file.mv(`./files/${fileName}`, (err) => {
       if (err) return res.status(500).send(err);
-      res.send(`${SECURE}://${DOMAIN}/${fileName}`);
+      res.send(`${URL}${fileName}`);
     });
   } else {
     res.sendStatus(418);
@@ -35,11 +33,18 @@ app.post('/upload', async (req, res) => {
 
 app.get('/:file', async (req, res) => {
   const file = req.params.file;
-  const description = await image.imageClassification(`files/${file}`);
+  const path = `files/${file}`;
+
+  if (!existsSync(path)) {
+    return res.sendStatus(418);
+  }
+
+  const description = await imageOCR(path);
+
   res.render('index', {
     title: file,
     domain: DOMAIN,
-    url: `${SECURE}://${DOMAIN}/`,
+    url: URL,
     description: description,
     image: `${SECURE}://${DOMAIN}/static/${file}`,
     color: randomColor(),
@@ -50,10 +55,10 @@ app.get('*', async (req, res) => {
   res.sendStatus(418);
 });
 
-const generateFileName = async (str, type) => {
-  return str + '.' + type[type.length - 1];
-};
-
 app.listen(PORT, () => {
   console.log(`Image uploader listening on port: ${PORT}`);
 });
+
+const generateFileName = async (str, type) => {
+  return str + '.' + type[type.length - 1];
+};

@@ -1,37 +1,29 @@
-const vision = require('@google-cloud/vision');
-const byteSize = require('byte-size');
-const fs = require('fs');
+import { ImageAnnotatorClient } from '@google-cloud/vision';
+import byteSize from 'byte-size';
+import { statSync } from 'fs';
 
-const client = new vision.ImageAnnotatorClient();
+const clientOptions = { apiEndpoint: 'eu-vision.googleapis.com' };
 
-module.exports.imageClassification = async (path) => {
+const client = new ImageAnnotatorClient(clientOptions);
+
+const imageOCR = async (path) => {
   try {
-    const [result] = await client.labelDetection(path);
-    const label = result.labelAnnotations[0];
-    const stats = fs.statSync(path);
-    return `Vision API: ${label.description}\nScore: ${
-      label.score
-    }\nI wasted ${byteSize(stats.size)}`;
+    const [result] = await client.textDetection(path);
+    const detections = result.textAnnotations;
+    const text = detections.filter((t) => t.locale === '')[0].description;
+    return text === '' ? imageLabel(path) : `OCR: ${text}`;
   } catch (err) {
     return '😳';
   }
 };
 
-/**
- * Tensorflow not supported on my cpu *cries*
- * 
- *  const mobilenet = require('@tensorflow-models/mobilenet');
-    const tfnode = require('@tensorflow/tfjs-node');
-    const readImage = (path) => {
-      const imageBuffer = fs.readFileSync(path);
-      const tfimage = tfnode.node.decodeImage(imageBuffer);
-      return tfimage;
-    };
- *
- *  try {
-    const image = readImage(path);
-    const mobilenetModel = await mobilenet.load();
-    const predictions = await mobilenetModel.classify(image);
-    return `TensorFlow: ${predictions[0]['className']}`;
-  } catch (err) {}
- */
+const imageLabel = async (path) => {
+  const [result] = await client.labelDetection(path);
+  const label = result.labelAnnotations[0];
+  const stats = statSync(path);
+  return `Vision API: ${label.description}\nScore: ${
+    label.score
+  }\nI wasted ${byteSize(stats.size)}`;
+};
+
+export { imageOCR };
