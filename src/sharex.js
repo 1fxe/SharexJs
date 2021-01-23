@@ -1,5 +1,5 @@
 import { PORT, DOMAIN, SECURE, URL } from './constants';
-import { randomstring } from 'randomstring';
+import { generate } from 'randomstring';
 import { randomColor } from 'randomcolor';
 import { imageOCR } from './image';
 import { existsSync } from 'fs';
@@ -18,7 +18,7 @@ app.use(express.json());
 app.post('/upload', async (req, res) => {
   if (req.body.key === process.env.KEY) {
     const file = req.files.file;
-    const randomName = randomstring.generate({ length: 12 });
+    const randomName = generate({ length: 12 });
     const type = file.name.split('.');
     const fileName = await generateFileName(randomName, type);
 

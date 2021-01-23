@@ -10,9 +10,15 @@ const imageOCR = async (path) => {
   try {
     const [result] = await client.textDetection(path);
     const detections = result.textAnnotations;
-    const text = detections.filter((t) => t.locale === '')[0].description;
-    return text === '' ? imageLabel(path) : `OCR: ${text}`;
+    const text = detections
+      .filter((t) => t.locale === '')
+      .map((t) => {
+        return t.description;
+      })
+      .join(' ');
+    return text !== '' ? `OCR: ${text}` : imageLabel(path);
   } catch (err) {
+    console.log(err);
     return '😳';
   }
 };
@@ -25,5 +31,7 @@ const imageLabel = async (path) => {
     label.score
   }\nI wasted ${byteSize(stats.size)}`;
 };
+
+imageOCR('files/test2.png');
 
 export { imageOCR };
