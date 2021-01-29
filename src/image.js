@@ -16,21 +16,23 @@ const imageOCR = async (path) => {
         return t.description;
       })
       .join(' ');
-    return text !== '' ? `OCR: ${text}` : imageLabel(path);
+    return text !== '' ? `OCR: ${text}` : await imageLabel(path);
   } catch (err) {
-    console.log(err);
     return '😳';
   }
 };
 
 const imageLabel = async (path) => {
-  const [result] = await client.labelDetection(path);
-  const label = result.labelAnnotations[0];
-  const stats = statSync(path);
-  return `Vision API: ${label.description}\nScore: ${
-    label.score
-  }\nI wasted ${byteSize(stats.size)}`;
+  try {
+    const [result] = await client.labelDetection(path);
+    const label = result.labelAnnotations[0];
+    const stats = statSync(path);
+    return `Vision API: ${label.description}\nScore: ${
+      label.score
+    }\nI wasted ${byteSize(stats.size)}`;
+  } catch (err) {
+    return '😳';
+  }
 };
-
 
 export { imageOCR };
