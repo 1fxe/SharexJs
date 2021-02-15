@@ -10,12 +10,14 @@ Requirements: [Google Vision](https://cloud.google.com/vision/docs/labels?hl=bg#
 
 Change the domain variable to your domain, basically anywhere it says localhost
 
-Run `npm install` to download dependencies  
+Run `yarn install` to download dependencies  
 Create a .env file with your chosen port, and use a custom key 🔐
 
 - Look at the .env.example
 
-Then run `npm run start` to start ✔
+Then run `yarn run buildAndStart` to start ✔
+
+This example uses nginx to serve the static files other branches use express
 
 ### Embed
 

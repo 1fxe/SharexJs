@@ -4,7 +4,9 @@
   "description": "Sharex file upload handler for node server",
   "main": "sharex.js",
   "scripts": {
-    "start": "babel src --out-dir build && node ./build/sharex"
+    "buildAndStart": "babel src --out-dir build && node ./build/sharex",
+    "build": "babel src --out-dir build",
+    "start": "node ./build/sharex"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,6 @@
     "express": "^4.17.1",
     "express-fileupload": ">=1.2.0",
     "pug": "^3.0.0",
-    "randomcolor": "^0.6.2",
     "randomstring": "^1.1.5"
   },
   "devDependencies": {
